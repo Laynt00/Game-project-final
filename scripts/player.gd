@@ -1,6 +1,6 @@
 extends CharacterBody2D
 # Cuando declaramos una signal estamos describiendo una acción ya realizada
-signal player_fired_bullet(bullet, position, direction)
+signal player_fired_bullet(bullet)
 
 @export var Bullet :PackedScene 
 @export var speed: int = 300
@@ -44,4 +44,5 @@ func shoot():
 	var target = get_global_mouse_position()
 	#var direction_to_mouse = target - bullet_instance.global_position
 	var direction_to_mouse = end_of_gun.global_position.direction_to(target).normalized()
-	emit_signal("player_fired_bullet", bullet_instance, end_of_gun.global_position, direction_to_mouse)
+	#emit_signal("player_fired_bullet", bullet_instance)
+	player_fired_bullet.emit(bullet_instance)
