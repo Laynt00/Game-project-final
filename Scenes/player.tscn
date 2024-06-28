@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlwyulgm6pqmf"]
+
+[ext_resource type="Texture2D" uid="uid://c772babaql7d1" path="res://assets/Individual Animations/Handgun1.png" id="1_cev36"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_m4eei"]
+[ext_resource type="PackedScene" uid="uid://b8goknw77odfi" path="res://Scenes/bullet.tscn" id="2_xthfh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpoa8"]
+size = Vector2(19, 14)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_m4eei")
+Bullet = ExtResource("2_xthfh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cev36")
+region_enabled = true
+region_rect = Rect2(14.7206, 14.61, 31.81, 18.0726)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 0)
+shape = SubResource("RectangleShape2D_dpoa8")
+
+[node name="EndOfGun" type="Marker2D" parent="."]
+position = Vector2(18, 0)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx2pdvidm8ql"]
+
+[ext_resource type="PackedScene" uid="uid://dlwyulgm6pqmf" path="res://Scenes/player.tscn" id="1_djv4q"]
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_p4gg1"]
+[ext_resource type="Script" path="res://BulletManager.gd" id="3_dh3hl"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_p4gg1")
+
+[node name="Player" parent="." instance=ExtResource("1_djv4q")]
+position = Vector2(15, 9)
+
+[node name="BulletManager" type="Node2D" parent="."]
+script = ExtResource("3_dh3hl")
