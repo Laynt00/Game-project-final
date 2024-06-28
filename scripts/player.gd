@@ -6,6 +6,7 @@ signal player_fired_bullet(bullet, position, direction)
 @export var speed: int = 300
 
 @onready var end_of_gun = $EndOfGun
+@onready var attack_cooldown = $AttackCooldown
 
 func _ready():
 	pass
@@ -36,7 +37,10 @@ func _unhandled_input(event):
 		shoot()
 		
 func shoot():
-	var bullet_instance = Bullet.instantiate()
-	var target = get_global_mouse_position()
-	var direction_to_mouse = end_of_gun.global_position.direction_to(target).normalized()
-	player_fired_bullet.emit(bullet_instance, end_of_gun.global_position, direction_to_mouse)
+	if attack_cooldown.is_stopped():
+		var bullet_instance = Bullet.instantiate()
+		var target = get_global_mouse_position()
+		var direction_to_mouse = end_of_gun.global_position.direction_to(target).normalized()
+		player_fired_bullet.emit(bullet_instance, end_of_gun.global_position, direction_to_mouse)
+		attack_cooldown.start()
+	

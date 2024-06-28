@@ -22,3 +22,7 @@ shape = SubResource("RectangleShape2D_dpoa8")
 
 [node name="EndOfGun" type="Marker2D" parent="."]
 position = Vector2(18, 0)
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
