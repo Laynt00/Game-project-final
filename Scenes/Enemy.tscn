@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4khw48hcdmjs"]
+[gd_scene load_steps=8 format=3 uid="uid://c4khw48hcdmjs"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_8xlt4"]
 [ext_resource type="Texture2D" uid="uid://c03pts7kcbequ" path="res://assets/Individual Animations/Enemy_1.png" id="2_2igqx"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpoa8"]
 size = Vector2(19, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tq2m8"]
+radius = 72.5602
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_8xlt4")
@@ -28,3 +31,10 @@ position = Vector2(2.36173, -1.5909)
 
 [node name="AI" type="Node2D" parent="."]
 script = ExtResource("5_axw57")
+
+[node name="PlayerDetectionZone" type="Area2D" parent="AI" groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/PlayerDetectionZone"]
+shape = SubResource("CircleShape2D_tq2m8")
+
+[connection signal="body_entered" from="AI/PlayerDetectionZone" to="AI" method="_on_player_detection_zone_body_entered"]

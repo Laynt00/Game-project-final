@@ -1,15 +1,11 @@
 extends CharacterBody2D
 class_name Player
-# Cuando declaramos una signal estamos describiendo una acción ya realizada
-signal player_fired_bullet(bullet, position, direction)
 
 @export var speed: int = 300
 
 @onready var weapon = $Weapon
 @onready var health_stat = $Health
 
-func _ready():
-	weapon.connect("weapon_fired", shoot)
 # Cada frame se llama a esta funcion
 func _physics_process(delta):
 	# con := le damos el tipo de dato directamente a la var
@@ -35,10 +31,6 @@ func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
 		print("Click")
 		weapon.shoot()
-		
-func shoot(bullet_instance, location: Vector2, direction: Vector2):
-	print("Entra en funcion shoot")
-	player_fired_bullet.emit(bullet_instance, location, direction)
 	
 func handle_hit():
 	health_stat.health -= 20

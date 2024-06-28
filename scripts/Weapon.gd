@@ -1,6 +1,5 @@
 extends Node2D
-
-signal weapon_fired(bullet, location, direction)
+class_name  Weapon
 
 @export var Bullet :PackedScene 
 
@@ -14,7 +13,7 @@ func shoot():
 		var bullet_instance = Bullet.instantiate()
 		var target = get_global_mouse_position()
 		var direction_to_mouse = end_of_gun.global_position.direction_to(target).normalized()
-		weapon_fired.emit(bullet_instance, end_of_gun.global_position, direction_to_mouse)
+		GlobalSignals.bullet_fired.emit(bullet_instance, end_of_gun.global_position, direction_to_mouse)
 		gunshot.play()
 		attack_cooldown.start()
 		animation_player.play("muzzle_flash")

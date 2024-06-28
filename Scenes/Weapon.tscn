@@ -64,6 +64,7 @@ root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_6mvvo")
 }
+speed_scale = -3.018
 
 [node name="gunshot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_3qcth")
