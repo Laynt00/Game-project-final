@@ -1,6 +1,6 @@
 extends CharacterBody2D
 # Cuando declaramos una signal estamos describiendo una acción ya realizada
-signal player_fired_bullet(bullet)
+signal player_fired_bullet(bullet, position, direction)
 
 @export var Bullet :PackedScene 
 @export var speed: int = 300
@@ -37,12 +37,6 @@ func _unhandled_input(event):
 		
 func shoot():
 	var bullet_instance = Bullet.instantiate()
-	# El transform aplicado al padre Player también se aplica a los nodos hijos
-	# por eso en esta situación al rotal el player también lo harán las balas
-	#add_child(bullet_instance) 
-	bullet_instance.global_position = end_of_gun.global_position
 	var target = get_global_mouse_position()
-	#var direction_to_mouse = target - bullet_instance.global_position
 	var direction_to_mouse = end_of_gun.global_position.direction_to(target).normalized()
-	#emit_signal("player_fired_bullet", bullet_instance)
-	player_fired_bullet.emit(bullet_instance)
+	player_fired_bullet.emit(bullet_instance, end_of_gun.global_position, direction_to_mouse)

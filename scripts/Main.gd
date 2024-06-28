@@ -9,6 +9,3 @@ func _ready():
 	# Usamos Callable para llamar a una función dentro de un objeto 
 	player.player_fired_bullet.connect(Callable(bullet_manager, "handle_bullet_spawned"))
 
-
-#func _on_player_player_fired_bullet(bullet):
-#	print("Recibido")
