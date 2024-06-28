@@ -1,17 +1,17 @@
 extends CharacterBody2D
+class_name Player
 # Cuando declaramos una signal estamos describiendo una acción ya realizada
 signal player_fired_bullet(bullet, position, direction)
 
-@export var Bullet :PackedScene 
 @export var speed: int = 300
 
-@onready var end_of_gun = $EndOfGun
-@onready var attack_cooldown = $AttackCooldown
+@onready var weapon = $Weapon
+@onready var health_stat = $Health
 
 func _ready():
-	pass
+	weapon.connect("weapon_fired", shoot)
 # Cada frame se llama a esta funcion
-func _process(delta):
+func _physics_process(delta):
 	# con := le damos el tipo de dato directamente a la var
 	var movement_direction := Vector2.ZERO
 	
@@ -25,7 +25,6 @@ func _process(delta):
 		movement_direction.x = 1
 
 	movement_direction = movement_direction.normalized()
-	
 	velocity = movement_direction * speed
 	move_and_slide()
 
@@ -34,13 +33,13 @@ func _process(delta):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
-		shoot()
+		print("Click")
+		weapon.shoot()
 		
-func shoot():
-	if attack_cooldown.is_stopped():
-		var bullet_instance = Bullet.instantiate()
-		var target = get_global_mouse_position()
-		var direction_to_mouse = end_of_gun.global_position.direction_to(target).normalized()
-		player_fired_bullet.emit(bullet_instance, end_of_gun.global_position, direction_to_mouse)
-		attack_cooldown.start()
+func shoot(bullet_instance, location: Vector2, direction: Vector2):
+	print("Entra en funcion shoot")
+	player_fired_bullet.emit(bullet_instance, location, direction)
 	
+func handle_hit():
+	health_stat.health -= 20
+	print("player hit!", health_stat.health)
