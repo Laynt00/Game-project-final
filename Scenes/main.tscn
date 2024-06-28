@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx2pdvidm8ql"]
+[gd_scene load_steps=11 format=3 uid="uid://cx2pdvidm8ql"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_cs78w"]
 [ext_resource type="PackedScene" uid="uid://dlwyulgm6pqmf" path="res://Scenes/Player.tscn" id="2_1hebh"]
-[ext_resource type="PackedScene" uid="uid://c4khw48hcdmjs" path="res://Scenes/Enemy.tscn" id="3_umuxx"]
 [ext_resource type="Script" path="res://BulletManager.gd" id="4_qsq5d"]
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="4_t3euf"]
+[ext_resource type="Texture2D" uid="uid://c03pts7kcbequ" path="res://assets/Individual Animations/Enemy_1.png" id="5_icgsk"]
+[ext_resource type="PackedScene" uid="uid://ph12rvvvssew" path="res://Scenes/Health.tscn" id="6_crf4v"]
+[ext_resource type="PackedScene" uid="uid://bbwclyqetqxiv" path="res://Scenes/Weapon.tscn" id="7_36a3r"]
+[ext_resource type="Script" path="res://scripts/Actors/AI.gd" id="8_8cfqo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpoa8"]
+size = Vector2(19, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tq2m8"]
+radius = 108.624
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_cs78w")
@@ -17,5 +27,30 @@ zoom = Vector2(2, 2)
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("4_qsq5d")
 
-[node name="Enemy" parent="." instance=ExtResource("3_umuxx")]
-position = Vector2(248, 12)
+[node name="Enemy" type="CharacterBody2D" parent="."]
+position = Vector2(223, -102)
+script = ExtResource("4_t3euf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("5_icgsk")
+region_enabled = true
+region_rect = Rect2(14.7206, 14.61, 31.81, 18.0726)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(-3.5, 0)
+shape = SubResource("RectangleShape2D_dpoa8")
+
+[node name="Health" parent="Enemy" instance=ExtResource("6_crf4v")]
+
+[node name="Weapon" parent="Enemy" instance=ExtResource("7_36a3r")]
+position = Vector2(2.36173, -1.5909)
+
+[node name="AI" type="Node2D" parent="Enemy"]
+script = ExtResource("8_8cfqo")
+
+[node name="PlayerDetectionZone" type="Area2D" parent="Enemy/AI" groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/AI/PlayerDetectionZone"]
+shape = SubResource("CircleShape2D_tq2m8")
+
+[connection signal="body_entered" from="Enemy/AI/PlayerDetectionZone" to="Enemy/AI" method="_on_player_detection_zone_body_entered"]
