@@ -16,8 +16,9 @@ enum State{
 
 var current_state: int = -1 : set = _set_state
 var actor: CharacterBody2D = null
-var player: Player = null
+var target: CharacterBody2D = null
 var weapon: Weapon = null
+var team: int = -1
 
 # PATROL STATE
 var origin: Vector2 = Vector2.ZERO
@@ -39,21 +40,24 @@ func _physics_process(delta):
 					patrol_location_reached = true
 					actor_velocity - Vector2.ZERO
 					patrol_timer.start()
-		State.ENGAGE:
-			if player != null and weapon != null:
-				var angle_to_player = actor.global_position.direction_to(player.global_position).angle()
-				actor.rotate_toward(player.global_position)
-				if abs(actor.rotation - angle_to_player) < 0.1:
-					weapon.shoot()
+		State.ENGAGE:			
+			if target != null and weapon != null:
+				var angle_to_target = actor.global_position.direction_to(target.global_position).angle()
+				actor.rotate_toward(target.global_position)
+				print(abs(actor.rotation - angle_to_target))
+				# Para que  empiece a disparar solo cuando esta cerca de apuntarle
+				#if abs(actor.rotation - angle_to_target) < 0.4:
+				weapon.shoot()
 			else:
-				print("In the engage state but no weapon/player")
+				print("In the engage state but no weapon/target")
 		_:
 			print("Error: Found a state for our enemy that should not exist")
 
 
-func initialize(actor, weapon: Weapon):
+func initialize(actor: CharacterBody2D, weapon: Weapon, team: int):
 	self.actor = actor
 	self.weapon = weapon
+	self.team = team
 
 func _set_state(new_state: int):
 	if new_state == current_state:
@@ -67,20 +71,6 @@ func _set_state(new_state: int):
 	state_changed.emit(current_state)
 	
 
-
-func _on_player_detection_zone_body_entered(body):
-	print("Entro en zona")
-	if body.is_in_group("player"):
-		_set_state(State.ENGAGE)
-		player = body
-
-func _on_player_detection_zone_body_exited(body):
-	print("Salgo de zona")
-	if player and body == player:
-		_set_state(State.PATROL)
-		player == null
-
-
 func _on_patrol_timer_timeout():
 	var patrol_range = 50
 	var random_x = randf_range(-patrol_range, patrol_range) 
@@ -88,3 +78,17 @@ func _on_patrol_timer_timeout():
 	patrol_location = Vector2(random_x, random_y) + origin
 	patrol_location_reached = false
 	actor_velocity = actor.velocity_toward(patrol_location)
+
+
+func _on_detection_zone_body_entered(body):
+	if body.has_method("get_team") and body.get_team() != team:
+		print("Entro en zona")
+		if body.is_in_group("player"):
+			_set_state(State.ENGAGE)
+			target = body
+
+func _on_detection_zone_body_exited(body):
+	print("Salgo de zona")
+	if target and body == target:
+		_set_state(State.PATROL)
+		target == null

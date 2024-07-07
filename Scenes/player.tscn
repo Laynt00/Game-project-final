@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlwyulgm6pqmf"]
+[gd_scene load_steps=7 format=3 uid="uid://dlwyulgm6pqmf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_avb2e"]
 [ext_resource type="Texture2D" uid="uid://c772babaql7d1" path="res://assets/Individual Animations/Handgun1.png" id="3_s0pxx"]
 [ext_resource type="PackedScene" uid="uid://bbwclyqetqxiv" path="res://Scenes/Weapon.tscn" id="4_5vm6j"]
+[ext_resource type="PackedScene" uid="uid://b0lskxloyu4wr" path="res://Scenes/Team.tscn" id="5_7bplc"]
 [ext_resource type="PackedScene" uid="uid://ph12rvvvssew" path="res://Scenes/Health.tscn" id="6_vhhsm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpoa8"]
@@ -24,3 +25,6 @@ shape = SubResource("RectangleShape2D_dpoa8")
 
 [node name="Weapon" parent="." instance=ExtResource("4_5vm6j")]
 position = Vector2(6.38299, 0.387506)
+
+[node name="Team" parent="." instance=ExtResource("5_7bplc")]
+team = 1
