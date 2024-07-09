@@ -8,8 +8,6 @@ enum State{
 	ENGAGE
 }
 
-
-@onready var player_detection_zone = $PlayerDetectionZone
 @onready var patrol_timer = $PatrolTimer
 
 
@@ -40,14 +38,13 @@ func _physics_process(delta):
 					patrol_location_reached = true
 					actor_velocity - Vector2.ZERO
 					patrol_timer.start()
-		State.ENGAGE:			
+		State.ENGAGE:
 			if target != null and weapon != null:
-				var angle_to_target = actor.global_position.direction_to(target.global_position).angle()
 				actor.rotate_toward(target.global_position)
-				print(abs(actor.rotation - angle_to_target))
-				# Para que  empiece a disparar solo cuando esta cerca de apuntarle
-				#if abs(actor.rotation - angle_to_target) < 0.4:
-				weapon.shoot()
+				var angle_to_target = actor.global_position.direction_to(target.global_position).angle()
+				var enemy_shoot_angle = abs(rad_to_deg(angle_to_target) - fmod(actor.rotation_degrees, 360))
+				if enemy_shoot_angle < 30 or enemy_shoot_angle > 330 :
+					weapon.shoot()
 			else:
 				print("In the engage state but no weapon/target")
 		_:
@@ -82,10 +79,8 @@ func _on_patrol_timer_timeout():
 
 func _on_detection_zone_body_entered(body):
 	if body.has_method("get_team") and body.get_team() != team:
-		print("Entro en zona")
-		if body.is_in_group("player"):
-			_set_state(State.ENGAGE)
-			target = body
+		_set_state(State.ENGAGE)
+		target = body
 
 func _on_detection_zone_body_exited(body):
 	print("Salgo de zona")

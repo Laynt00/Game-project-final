@@ -27,4 +27,3 @@ shape = SubResource("RectangleShape2D_dpoa8")
 position = Vector2(6.38299, 0.387506)
 
 [node name="Team" parent="." instance=ExtResource("5_7bplc")]
-team = 1
