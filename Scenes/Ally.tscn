@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c436eub3jhyyo"]
 
-[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_dcc5h"]
+[ext_resource type="Script" path="res://scripts/Actor.gd" id="1_dcc5h"]
 [ext_resource type="Texture2D" uid="uid://c772babaql7d1" path="res://assets/Individual Animations/Handgun1.png" id="2_lcxxh"]
 [ext_resource type="PackedScene" uid="uid://ph12rvvvssew" path="res://Scenes/Health.tscn" id="3_ln467"]
 [ext_resource type="PackedScene" uid="uid://bbwclyqetqxiv" path="res://Scenes/Weapon.tscn" id="4_o5y18"]

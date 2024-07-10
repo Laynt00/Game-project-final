@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbwclyqetqxiv"]
+[gd_scene load_steps=9 format=3 uid="uid://bbwclyqetqxiv"]
 
 [ext_resource type="Script" path="res://scripts/Weapon.gd" id="1_mpbnj"]
 [ext_resource type="PackedScene" uid="uid://b8goknw77odfi" path="res://Scenes/bullet.tscn" id="2_qd1hj"]
@@ -9,34 +9,54 @@
 [sub_resource type="Animation" id="Animation_wcjfj"]
 resource_name = "muzzle_flash"
 length = 0.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.5, 0.5)]
 }
-tracks/1/type = "value"
+
+[sub_resource type="Animation" id="Animation_r1me8"]
+resource_name = "reload"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -1.5708, 0.0]
+}
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
+tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0.8, 0.8)]
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop_reload"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6mvvo"]
 _data = {
-"muzzle_flash": SubResource("Animation_wcjfj")
+"muzzle_flash": SubResource("Animation_wcjfj"),
+"reload": SubResource("Animation_r1me8")
 }
 
 [node name="Weapon" type="Node2D"]
@@ -55,8 +75,9 @@ wait_time = 0.2
 one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(8, 0)
-scale = Vector2(1e-05, 1e-05)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_1tn3d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

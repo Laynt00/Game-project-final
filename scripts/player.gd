@@ -30,8 +30,12 @@ func _physics_process(delta):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
-		print("Click")
 		weapon.shoot()
+	if event.is_action_pressed("reload"):
+		weapon.start_reload()
+		
+func reload():
+	weapon.start_reload()
 
 func get_team() -> int:
 	return team.team

@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx2pdvidm8ql"]
+[gd_scene load_steps=5 format=3 uid="uid://cx2pdvidm8ql"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_cs78w"]
 [ext_resource type="PackedScene" uid="uid://dlwyulgm6pqmf" path="res://Scenes/Player.tscn" id="2_1hebh"]
 [ext_resource type="Script" path="res://BulletManager.gd" id="4_qsq5d"]
 [ext_resource type="PackedScene" uid="uid://c4khw48hcdmjs" path="res://Scenes/Enemy.tscn" id="4_s3gfo"]
-[ext_resource type="PackedScene" uid="uid://c436eub3jhyyo" path="res://Scenes/Ally.tscn" id="5_yu2lg"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_cs78w")
@@ -21,6 +20,3 @@ script = ExtResource("4_qsq5d")
 
 [node name="Enemy" parent="." instance=ExtResource("4_s3gfo")]
 position = Vector2(28, -122)
-
-[node name="Ally" parent="." instance=ExtResource("5_yu2lg")]
-position = Vector2(128, -73)

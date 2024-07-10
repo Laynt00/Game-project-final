@@ -26,6 +26,9 @@ var actor_velocity: Vector2 = Vector2.ZERO
 
 func _ready():
 	_set_state(State.PATROL)
+	
+		#GlobalSignals.bullet_fired.connect(Callable(bullet_manager, "handle_bullet_spawned"))
+	
 func _physics_process(delta):
 	match current_state:
 		State.PATROL:
@@ -40,6 +43,7 @@ func _physics_process(delta):
 					patrol_timer.start()
 		State.ENGAGE:
 			if target != null and weapon != null:
+				# Rotamos hasta enfrentar al enemigo
 				actor.rotate_toward(target.global_position)
 				var angle_to_target = actor.global_position.direction_to(target.global_position).angle()
 				var enemy_shoot_angle = abs(rad_to_deg(angle_to_target) - fmod(actor.rotation_degrees, 360))
@@ -55,6 +59,8 @@ func initialize(actor: CharacterBody2D, weapon: Weapon, team: int):
 	self.actor = actor
 	self.weapon = weapon
 	self.team = team
+	#objeto.signal.connect(Callable(objeto, funcion) #FUNCIONAAA!!!!!  ESTÁAAA VIVOOOOO
+	weapon.weapon_out_of_ammo.connect(Callable(self, "handle_reload"))
 
 func _set_state(new_state: int):
 	if new_state == current_state:
@@ -67,6 +73,9 @@ func _set_state(new_state: int):
 	current_state = new_state
 	state_changed.emit(current_state)
 	
+func handle_reload():
+	print("Entro en handle_reload")
+	weapon.start_reload()
 
 func _on_patrol_timer_timeout():
 	var patrol_range = 50
