@@ -34,6 +34,7 @@ position = Vector2(2.36173, -1.5909)
 script = ExtResource("5_axw57")
 
 [node name="DetectionZone" type="Area2D" parent="AI" groups=["enemy"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AI/DetectionZone"]
 shape = SubResource("CircleShape2D_tq2m8")

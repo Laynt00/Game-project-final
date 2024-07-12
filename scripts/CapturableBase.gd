@@ -1,4 +1,7 @@
 extends Area2D
+class_name CapturableBase
+
+signal base_captured(new_team)
 
 @export var neutral_color = Color(1, 1, 1)
 @export var player_color = Color(0.851, 0.536, 0.385)
