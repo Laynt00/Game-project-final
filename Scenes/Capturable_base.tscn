@@ -15,11 +15,16 @@ script = ExtResource("1_5df5a")
 position = Vector2(-35, -32)
 shape = SubResource("RectangleShape2D_rg1ia")
 
-[node name="Team" parent="." instance=ExtResource("2_6agcg")]
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-35, -32)
 texture = ExtResource("3_7cn25")
 
+[node name="Team" parent="." instance=ExtResource("2_6agcg")]
+
+[node name="CaptureTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="CaptureTimer" to="." method="_on_capture_timer_timeout"]

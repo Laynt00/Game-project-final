@@ -11,7 +11,7 @@ signal weapon_out_of_ammo
 @onready var gunshot = $gunshot
 @onready var muzzle_flash = $MuzzleFlash
 
-var max_ammo: = 3
+var max_ammo: = 10
 var current_ammo: int = max_ammo
 
 func _ready():

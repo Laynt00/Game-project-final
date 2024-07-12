@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbwclyqetqxiv"]
+[gd_scene load_steps=8 format=3 uid="uid://bbwclyqetqxiv"]
 
 [ext_resource type="Script" path="res://scripts/Weapon.gd" id="1_mpbnj"]
 [ext_resource type="PackedScene" uid="uid://b8goknw77odfi" path="res://Scenes/bullet.tscn" id="2_qd1hj"]
@@ -6,43 +6,39 @@
 [ext_resource type="Texture2D" uid="uid://d027untadv61i" path="res://assets/Individual Icons and Particles/player_weapon.png" id="3_w27sp"]
 [ext_resource type="AudioStream" uid="uid://bjv4gattlpwnk" path="res://assets/Sounds/gunshot.wav" id="4_3qcth"]
 
-[sub_resource type="Animation" id="Animation_wcjfj"]
-resource_name = "muzzle_flash"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0.5, 0.5)]
-}
-
-[sub_resource type="Animation" id="Animation_yi5ss"]
+[sub_resource type="Animation" id="Animation_0lo72"]
 resource_name = "reload"
-length = 2.0
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:scale")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.7, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(2, 2)]
+"values": [0.0, -1.5708, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop_reload"
+}]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6mvvo"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5nt14"]
 _data = {
-"muzzle_flash": SubResource("Animation_wcjfj"),
-"reload": SubResource("Animation_yi5ss")
+"reload": SubResource("Animation_0lo72")
 }
 
 [node name="Weapon" type="Node2D"]
@@ -68,13 +64,9 @@ scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_1tn3d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../MuzzleFlash")
 libraries = {
-"": SubResource("AnimationLibrary_6mvvo")
+"": SubResource("AnimationLibrary_5nt14")
 }
-speed_scale = -3.018
 
 [node name="gunshot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_3qcth")
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

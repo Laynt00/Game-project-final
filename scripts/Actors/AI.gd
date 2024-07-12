@@ -87,6 +87,7 @@ func _on_patrol_timer_timeout():
 
 
 func _on_detection_zone_body_entered(body):
+	print("Entro en la zona")
 	if body.has_method("get_team") and body.get_team() != team:
 		_set_state(State.ENGAGE)
 		target = body

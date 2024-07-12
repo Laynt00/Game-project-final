@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dlwyulgm6pqmf" path="res://Scenes/Player.tscn" id="2_1hebh"]
 [ext_resource type="Script" path="res://BulletManager.gd" id="4_qsq5d"]
 [ext_resource type="PackedScene" uid="uid://c4khw48hcdmjs" path="res://Scenes/Enemy.tscn" id="4_s3gfo"]
-[ext_resource type="PackedScene" uid="uid://c436eub3jhyyo" path="res://Scenes/Ally.tscn" id="5_5joqq"]
+[ext_resource type="PackedScene" uid="uid://d43xah4ukn5t" path="res://Scenes/Capturable_base.tscn" id="5_olhbt"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_cs78w")
 
 [node name="Player" parent="." instance=ExtResource("2_1hebh")]
-position = Vector2(-14, 62)
+position = Vector2(-75, 113)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-17, -32)
@@ -20,7 +20,7 @@ zoom = Vector2(2, 2)
 script = ExtResource("4_qsq5d")
 
 [node name="Enemy" parent="." instance=ExtResource("4_s3gfo")]
-position = Vector2(28, -122)
+position = Vector2(112, 95)
 
-[node name="Ally" parent="." instance=ExtResource("5_5joqq")]
-position = Vector2(142, 62)
+[node name="CapturableBase" parent="." instance=ExtResource("5_olhbt")]
+position = Vector2(157, 148)
