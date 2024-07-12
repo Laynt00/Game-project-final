@@ -11,7 +11,7 @@ signal weapon_out_of_ammo
 @onready var gunshot = $gunshot
 @onready var muzzle_flash = $MuzzleFlash
 
-var max_ammo: = 10
+var max_ammo: = 3
 var current_ammo: int = max_ammo
 
 func _ready():
@@ -33,9 +33,13 @@ func shoot():
 		#var direction = end_of_gun.global_position.direction_to(target).normalized()
 		var direction = (end_of_gun.global_position - global_position).normalized()
 		GlobalSignals.bullet_fired.emit(bullet_instance, end_of_gun.global_position, direction)
-		gunshot.play()
+		#gunshot.play()
 		attack_cooldown.start()
 		animation_player.play("muzzle_flash")
 		current_ammo -= 1
 		if current_ammo == 0:
 			weapon_out_of_ammo.emit()
+
+
+func _on_animation_player_animation_finished(start_reload):
+	current_ammo = max_ammo

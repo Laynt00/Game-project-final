@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d43xah4ukn5t"]
+
+[ext_resource type="Script" path="res://scripts/CapturableBase.gd" id="1_5df5a"]
+[ext_resource type="PackedScene" uid="uid://b0lskxloyu4wr" path="res://Scenes/Team.tscn" id="2_6agcg"]
+[ext_resource type="Texture2D" uid="uid://c7d8cibl71bas" path="res://assets/Individual Tiles/Capture.png" id="3_7cn25"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rg1ia"]
+size = Vector2(90, 84)
+
+[node name="CapturableBase" type="Area2D"]
+position = Vector2(158, 112)
+script = ExtResource("1_5df5a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-35, -32)
+shape = SubResource("RectangleShape2D_rg1ia")
+
+[node name="Team" parent="." instance=ExtResource("2_6agcg")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-35, -32)
+texture = ExtResource("3_7cn25")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
