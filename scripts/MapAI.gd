@@ -44,6 +44,8 @@ func get_next_capturable_base():
 	return null
 	
 func assign_next_capturable_base_to_units(base_location: Vector2):
+	if base_location == null or base_location == Vector2.ZERO:
+		return
 	for unit in get_children():
 		if unit == team:
 			continue

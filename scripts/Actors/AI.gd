@@ -43,9 +43,11 @@ func _physics_process(delta):
 				actor.velocity = actor_velocity
 				actor.move_and_slide()
 				actor.rotate_toward(patrol_location)
+				# Si el actor ha llegado a la localizacion 
 				if actor.has_reached_pos(patrol_location):
 					patrol_location_reached = true
-					actor_velocity - Vector2.ZERO
+					actor_velocity = Vector2.ZERO
+					#actor_velocity - Vector2.ZERO
 					patrol_timer.start()
 		State.ENGAGE:
 			if target != null and weapon != null:

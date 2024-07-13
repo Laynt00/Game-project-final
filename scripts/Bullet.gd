@@ -1,7 +1,7 @@
 extends Area2D
 class_name Bullet
 
-@export var speed: int = 6
+@export var speed: int = 4
 @onready var kill_timer = $KillTimer
 
 var direction := Vector2.ZERO

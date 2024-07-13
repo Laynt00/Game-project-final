@@ -66,6 +66,7 @@ func get_team_with_mayority()-> int:
 func set_team(new_team: int):
 	print("Entro en asignar color")
 	team.team = new_team
+	emit_signal("base_captured", new_team)
 	match new_team:
 		Team.TeamName.NEUTRAL:
 			sprite_2d.modulate = neutral_color

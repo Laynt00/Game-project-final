@@ -43,22 +43,20 @@ rotation = -0.190399
 
 [node name="EnemyMapAI" type="Node2D" parent="."]
 script = ExtResource("2_gdf02")
+base_capture_start_order = 1
 
 [node name="Team" type="Node2D" parent="EnemyMapAI"]
 script = ExtResource("5_yn5jb")
 team = 2
 
 [node name="Enemy" parent="EnemyMapAI" instance=ExtResource("4_s3gfo")]
-position = Vector2(578, 2)
-rotation = -2.83117
+position = Vector2(576, 287)
 
 [node name="Enemy2" parent="EnemyMapAI" instance=ExtResource("4_s3gfo")]
-position = Vector2(619, 179)
-rotation = -2.83117
+position = Vector2(614, 192)
 
 [node name="Enemy3" parent="EnemyMapAI" instance=ExtResource("4_s3gfo")]
-position = Vector2(687, 71)
-rotation = -2.83117
+position = Vector2(406, 303)
 
 [node name="Player" parent="." instance=ExtResource("2_1hebh")]
 position = Vector2(17, 113)
