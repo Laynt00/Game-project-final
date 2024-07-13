@@ -17,15 +17,16 @@ script = ExtResource("1_cs78w")
 script = ExtResource("2_kmgnh")
 
 [node name="CapturableBase" parent="CapturableBaseManager" instance=ExtResource("5_olhbt")]
-position = Vector2(157, 148)
+position = Vector2(148.64, 39.7478)
 
 [node name="CapturableBase2" parent="CapturableBaseManager" instance=ExtResource("5_olhbt")]
-position = Vector2(806, 153)
+position = Vector2(346, -18)
 
 [node name="CapturableBase3" parent="CapturableBaseManager" instance=ExtResource("5_olhbt")]
-position = Vector2(497, 148)
+position = Vector2(513, 165)
 
 [node name="AllyMapAI" type="Node2D" parent="."]
+position = Vector2(-1, 0)
 script = ExtResource("2_gdf02")
 
 [node name="Team" type="Node2D" parent="AllyMapAI"]
@@ -33,7 +34,11 @@ script = ExtResource("5_yn5jb")
 team = 1
 
 [node name="Ally" parent="AllyMapAI" instance=ExtResource("6_tvg1k")]
-position = Vector2(7, 159)
+position = Vector2(-61, 147)
+rotation = -0.190399
+
+[node name="Ally2" parent="AllyMapAI" instance=ExtResource("6_tvg1k")]
+position = Vector2(-62, 73)
 rotation = -0.190399
 
 [node name="EnemyMapAI" type="Node2D" parent="."]
@@ -44,15 +49,15 @@ script = ExtResource("5_yn5jb")
 team = 2
 
 [node name="Enemy" parent="EnemyMapAI" instance=ExtResource("4_s3gfo")]
-position = Vector2(829, 30)
+position = Vector2(578, 2)
 rotation = -2.83117
 
 [node name="Enemy2" parent="EnemyMapAI" instance=ExtResource("4_s3gfo")]
-position = Vector2(870, 207)
+position = Vector2(619, 179)
 rotation = -2.83117
 
 [node name="Enemy3" parent="EnemyMapAI" instance=ExtResource("4_s3gfo")]
-position = Vector2(938, 99)
+position = Vector2(687, 71)
 rotation = -2.83117
 
 [node name="Player" parent="." instance=ExtResource("2_1hebh")]

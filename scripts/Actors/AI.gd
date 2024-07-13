@@ -1,11 +1,13 @@
 extends Node2D
+class_name AI
 
 signal state_changed(new_state)
 
 #Enumeramos los estados que tendrá la IA
 enum State{
 	PATROL,
-	ENGAGE
+	ENGAGE,
+	ADVANCE
 }
 
 @onready var patrol_timer = $PatrolTimer
@@ -13,7 +15,7 @@ enum State{
 
 
 var current_state: int = -1 : set = _set_state
-var actor: CharacterBody2D = null
+var actor: Actor = null
 var target: CharacterBody2D = null
 var weapon: Weapon = null
 var team: int = -1
@@ -23,6 +25,9 @@ var origin: Vector2 = Vector2.ZERO
 var patrol_location: Vector2 = Vector2.ZERO
 var patrol_location_reached: bool = false
 var actor_velocity: Vector2 = Vector2.ZERO
+
+# ADVANCE STATE
+var next_base: Vector2 = Vector2.ZERO
 
 func _ready():
 	_set_state(State.PATROL)
@@ -34,10 +39,11 @@ func _physics_process(delta):
 		State.PATROL:
 			if not patrol_location_reached:
 				#actor.move_and_slide(actor_velocity)
+				actor_velocity = actor.velocity_toward(patrol_location)
 				actor.velocity = actor_velocity
 				actor.move_and_slide()
 				actor.rotate_toward(patrol_location)
-				if actor.global_position.distance_to(patrol_location) < 5:
+				if actor.has_reached_pos(patrol_location):
 					patrol_location_reached = true
 					actor_velocity - Vector2.ZERO
 					patrol_timer.start()
@@ -51,6 +57,14 @@ func _physics_process(delta):
 					weapon.shoot()
 			else:
 				print("In the engage state but no weapon/target")
+		State.ADVANCE:
+			if actor.has_reached_pos(next_base):
+				_set_state(State.PATROL)
+			else:
+				actor_velocity = actor.velocity_toward(next_base)
+				actor.velocity = actor_velocity
+				actor.move_and_slide()
+				actor.rotate_toward(next_base)
 		_:
 			print("Error: Found a state for our enemy that should not exist")
 
@@ -69,6 +83,9 @@ func _set_state(new_state: int):
 		origin = global_position
 		patrol_timer.start()
 		patrol_location_reached = true
+	elif new_state == State.ADVANCE:
+		if actor.has_reached_pos(next_base):
+			_set_state(State.PATROL)
 		
 	current_state = new_state
 	state_changed.emit(current_state)
@@ -83,7 +100,7 @@ func _on_patrol_timer_timeout():
 	var random_y = randf_range(-patrol_range, patrol_range)
 	patrol_location = Vector2(random_x, random_y) + origin
 	patrol_location_reached = false
-	actor_velocity = actor.velocity_toward(patrol_location)
+	
 
 
 func _on_detection_zone_body_entered(body):
@@ -95,5 +112,5 @@ func _on_detection_zone_body_entered(body):
 func _on_detection_zone_body_exited(body):
 	print("Salgo de zona")
 	if target and body == target:
-		_set_state(State.PATROL)
+		_set_state(State.ADVANCE)
 		target == null

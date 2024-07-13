@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Enemy
+class_name Actor
 
 @onready var health_stat = $Health
 @onready var ai = $AI
@@ -18,6 +18,8 @@ func rotate_toward(location: Vector2):
 func velocity_toward(location: Vector2) -> Vector2:
 	return global_position.direction_to(location) * speed
 	
+func has_reached_pos(location: Vector2) -> bool:
+	return global_position.distance_to(location) < 5
 
 func get_team() -> int:
 	return team.team

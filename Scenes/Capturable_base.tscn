@@ -8,15 +8,12 @@
 size = Vector2(90, 84)
 
 [node name="CapturableBase" type="Area2D"]
-position = Vector2(158, 112)
 script = ExtResource("1_5df5a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-35, -32)
 shape = SubResource("RectangleShape2D_rg1ia")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-35, -32)
 texture = ExtResource("3_7cn25")
 
 [node name="Team" parent="." instance=ExtResource("2_6agcg")]
