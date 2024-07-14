@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Actor
 
+signal died
+
 @onready var health_stat = $Health
 @onready var ai = $AI
 @onready var weapon = $Weapon
@@ -28,5 +30,6 @@ func handle_hit():
 	health_stat.health -= 20
 	print("enemy hit!", health_stat.health)
 	if health_stat.health <= 0:
+		emit_signal("died")
 		queue_free()
 	

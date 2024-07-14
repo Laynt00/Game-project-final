@@ -1,11 +1,16 @@
 extends CharacterBody2D
 class_name Player
 
+signal died
+
 @export var speed: int = 300
 
 @onready var team = $Team
 @onready var weapon = $Weapon
 @onready var health_stat = $Health
+@onready var camera_transform = $CameraTransform
+
+
 
 # Cada frame se llama a esta funcion
 func _physics_process(delta):
@@ -33,7 +38,11 @@ func _unhandled_input(event):
 		weapon.shoot()
 	if event.is_action_pressed("reload"):
 		weapon.start_reload()
-		
+
+# Permite dar un transform remoto
+func set_camera_transform(camera_path: NodePath):
+	camera_transform.remote_path = camera_path
+
 func reload():
 	weapon.start_reload()
 
@@ -42,4 +51,9 @@ func get_team() -> int:
 	
 func handle_hit():
 	health_stat.health -= 20
-	print("player hit!", health_stat.health)
+	if health_stat.health <= 0:
+		die()
+	
+func die():
+	emit_signal("died")
+	queue_free()

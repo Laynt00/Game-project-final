@@ -1,10 +1,14 @@
 extends Node2D
 
+const Player = preload("res://Scenes/Player.tscn")
+
 @onready var capturable_base_manager = $CapturableBaseManager
-@onready var ally_map_ai = $AllyMapAI
-@onready var enemy_map_ai = $EnemyMapAI
+@onready var ally_ai = $AllyMapAI
+@onready var enemy_ai = $EnemyMapAI
 @onready var bullet_manager = $BulletManager
 @onready var player: Player = $Player
+@onready var camera = $Camera2D
+
 
 func _ready():
 	# Esta función nos permite randomizar numeros cada vez que iniciamos
@@ -14,7 +18,18 @@ func _ready():
 	# Usamos Callable para llamar a una función dentro de un objeto 
 	GlobalSignals.bullet_fired.connect(Callable(bullet_manager, "handle_bullet_spawned"))
 	
+	var ally_respawn = $AllyRespawnPoints
+	var enemy_respawns = $EnemyRespawnPoints
+	
 	var bases = capturable_base_manager.get_capturable_bases()
-	ally_map_ai.initialize(bases)
-	enemy_map_ai.initialize(bases)
-
+	ally_ai.initialize(bases, ally_respawn.get_children())
+	enemy_ai.initialize(bases, enemy_respawns.get_children())
+	
+	spawn_player()
+	
+func spawn_player():
+	var player = Player.instantiate()
+	add_child(player)			# con get_path cogemos el string del arbol de scenas
+	player.set_camera_transform(camera.get_path())
+	player.died.connect(Callable(self, "spawn_player"))
+	

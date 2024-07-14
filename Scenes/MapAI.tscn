@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://pqhab15gafqo"]
+
+[ext_resource type="Script" path="res://scripts/MapAI.gd" id="1_148s8"]
+[ext_resource type="Script" path="res://scripts/Team.gd" id="2_cyt15"]
+
+[node name="MapAI" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_148s8")
+
+[node name="Team" type="Node2D" parent="."]
+script = ExtResource("2_cyt15")
+team = 1
+
+[node name="UnitContainer" type="Node" parent="."]
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
