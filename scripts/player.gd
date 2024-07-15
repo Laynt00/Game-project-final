@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 signal died
+signal player_health_changed(new_health)
 
 @export var speed: int = 300
 
@@ -50,7 +51,9 @@ func get_team() -> int:
 	return team.team
 	
 func handle_hit():
-	health_stat.health -= 20
+	health_stat.health -= 10
+	emit_signal("player_health_changed", health_stat.health)
+	print(health_stat.health)
 	if health_stat.health <= 0:
 		die()
 	

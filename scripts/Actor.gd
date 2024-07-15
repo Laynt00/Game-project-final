@@ -27,7 +27,7 @@ func get_team() -> int:
 	return team.team
 
 func handle_hit():
-	health_stat.health -= 20
+	health_stat.health -= 25
 	print("enemy hit!", health_stat.health)
 	if health_stat.health <= 0:
 		emit_signal("died")

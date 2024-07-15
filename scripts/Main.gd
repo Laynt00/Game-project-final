@@ -8,7 +8,8 @@ const Player = preload("res://Scenes/Player.tscn")
 @onready var bullet_manager = $BulletManager
 @onready var player: Player = $Player
 @onready var camera = $Camera2D
-
+@onready var gui = $GUI
+	
 
 func _ready():
 	# Esta función nos permite randomizar numeros cada vez que iniciamos
@@ -32,4 +33,6 @@ func spawn_player():
 	add_child(player)			# con get_path cogemos el string del arbol de scenas
 	player.set_camera_transform(camera.get_path())
 	player.died.connect(Callable(self, "spawn_player"))
+	gui._set_player(player)
+	
 	
