@@ -19,10 +19,9 @@ func _ready():
 	muzzle_flash.hide()
 
 func start_reload():
-	print("recargo")
 	animation_player.play("reload")
 
-
+# Llamada al final de la animación para setear ammo
 func stop_reload():
 	current_ammo = max_ammo
 	
@@ -47,8 +46,3 @@ func shoot():
 		attack_cooldown.start()
 		animation_player.play("muzzle_flash")
 		_set_current_ammo(current_ammo - 1)
-		
-
-
-func _on_animation_player_animation_finished(start_reload):
-	current_ammo = max_ammo

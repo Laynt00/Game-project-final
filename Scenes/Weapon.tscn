@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbwclyqetqxiv"]
+[gd_scene load_steps=9 format=3 uid="uid://bbwclyqetqxiv"]
 
 [ext_resource type="Script" path="res://scripts/Weapon.gd" id="1_mpbnj"]
 [ext_resource type="PackedScene" uid="uid://b8goknw77odfi" path="res://Scenes/bullet.tscn" id="2_qd1hj"]
@@ -36,8 +36,24 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_sebf3"]
+resource_name = "muzzle_flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuzzleFlash:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.5, 0.5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5nt14"]
 _data = {
+"muzzle_flash": SubResource("Animation_sebf3"),
 "reload": SubResource("Animation_0lo72")
 }
 
@@ -58,9 +74,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(8, 0)
-scale = Vector2(1e-05, 1e-05)
+position = Vector2(8.18182, -4.76837e-07)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_1tn3d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

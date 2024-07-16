@@ -12,14 +12,16 @@ signal died
 
 func _ready():
 	ai.initialize(self, weapon, team.team)
-	
+
 func rotate_toward(location: Vector2):
 	rotation = lerp_angle(rotation, global_position.direction_to(location).angle(), 0.1)
 				
 
+# Dirección de movimiento del actor
 func velocity_toward(location: Vector2) -> Vector2:
 	return global_position.direction_to(location) * speed
-	
+
+# Comprueba si ya está cerca de una base
 func has_reached_pos(location: Vector2) -> bool:
 	return global_position.distance_to(location) < 5
 

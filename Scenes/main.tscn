@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cx2pdvidm8ql"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_cs78w"]
-[ext_resource type="Script" path="res://Scenes/CapturableBaseManager.gd" id="2_kmgnh"]
+[ext_resource type="Script" path="res://scripts/CapturableBaseManager.gd" id="2_kmgnh"]
 [ext_resource type="Script" path="res://BulletManager.gd" id="4_qsq5d"]
 [ext_resource type="PackedScene" uid="uid://c4khw48hcdmjs" path="res://Scenes/Enemy.tscn" id="4_s3gfo"]
 [ext_resource type="PackedScene" uid="uid://d43xah4ukn5t" path="res://Scenes/Capturable_base.tscn" id="5_olhbt"]

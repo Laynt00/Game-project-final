@@ -45,12 +45,11 @@ theme_override_fonts/font = ExtResource("2_w2eua")
 theme_override_font_sizes/font_size = 32
 text = " RESTART "
 
-[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2"]
-process_mode = 1
+[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_w2eua")
 theme_override_font_sizes/font_size = 32
-text = "QUIT"
+text = "EXIT"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2/Restart" to="." method="_on_restart_pressed"]
-[connection signal="button_down" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2/Quit" to="." method="_on_quit_button_down"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2/Exit" to="." method="_on_exit_pressed"]

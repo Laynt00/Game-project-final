@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d43xah4ukn5t"]
+[gd_scene load_steps=6 format=3 uid="uid://d43xah4ukn5t"]
 
 [ext_resource type="Script" path="res://scripts/CapturableBase.gd" id="1_5df5a"]
 [ext_resource type="PackedScene" uid="uid://b0lskxloyu4wr" path="res://Scenes/Team.tscn" id="2_6agcg"]
 [ext_resource type="Texture2D" uid="uid://c7d8cibl71bas" path="res://assets/Individual Tiles/Capture.png" id="3_7cn25"]
+[ext_resource type="AudioStream" uid="uid://qdayanu0u1jh" path="res://assets/Sounds/s_base_captured.wav" id="4_gb4en"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rg1ia"]
 size = Vector2(90, 84)
@@ -21,6 +22,10 @@ texture = ExtResource("3_7cn25")
 [node name="CaptureTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="s_captured" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gb4en")
+volume_db = -13.418
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

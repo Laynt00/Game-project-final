@@ -1,5 +1,6 @@
 extends Node2D
 
+# Al disparar generamos la bala y la add a la escena desde _ready() del main
 func handle_bullet_spawned(bullet: Bullet, position: Vector2, direction: Vector2):
 	add_child(bullet)
 	bullet.global_position = position

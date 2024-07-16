@@ -3,16 +3,14 @@ class_name AI
 
 signal state_changed(new_state)
 
+@onready var patrol_timer = $PatrolTimer
+
 #Enumeramos los estados que tendrá la IA
 enum State{
 	PATROL,
 	ENGAGE,
 	ADVANCE
 }
-
-@onready var patrol_timer = $PatrolTimer
-
-
 
 var current_state: int = -1 : set = _set_state
 var actor: Actor = null
@@ -31,8 +29,6 @@ var next_base: Vector2 = Vector2.ZERO
 
 func _ready():
 	_set_state(State.PATROL)
-	
-		#GlobalSignals.bullet_fired.connect(Callable(bullet_manager, "handle_bullet_spawned"))
 	
 func _physics_process(delta):
 	match current_state:
@@ -96,6 +92,7 @@ func handle_reload():
 	print("Entro en handle_reload")
 	weapon.start_reload()
 
+# En STATE patrulla se mueve x pixeles cuando se acaba el temporizador de patrulla
 func _on_patrol_timer_timeout():
 	var patrol_range = 50
 	var random_x = randf_range(-patrol_range, patrol_range) 
@@ -106,7 +103,6 @@ func _on_patrol_timer_timeout():
 
 
 func _on_detection_zone_body_entered(body):
-	print("Entro en la zona")
 	if body.has_method("get_team") and body.get_team() != team:
 		_set_state(State.ENGAGE)
 		target = body

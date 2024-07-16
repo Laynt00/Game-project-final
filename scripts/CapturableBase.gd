@@ -15,6 +15,7 @@ var team_to_capture: int = Team.TeamName.NEUTRAL
 @onready var team = $Team
 @onready var capture_timer = $CaptureTimer
 @onready var sprite_2d = $Sprite2D
+@onready var s_captured = $s_captured
 
 
 func _on_body_entered(body):
@@ -64,15 +65,17 @@ func get_team_with_mayority()-> int:
 		return Team.TeamName.PLAYER
 
 func set_team(new_team: int):
-	print("Entro en asignar color")
+
 	team.team = new_team
 	emit_signal("base_captured", new_team)
 	match new_team:
 		Team.TeamName.NEUTRAL:
 			sprite_2d.modulate = neutral_color
+			
 			return
 		Team.TeamName.PLAYER:
 			sprite_2d.modulate = player_color
+			s_captured.play()
 			return
 		Team.TeamName.ENEMY:
 			sprite_2d.modulate = enemy_color

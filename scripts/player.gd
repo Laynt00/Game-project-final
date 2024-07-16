@@ -30,7 +30,7 @@ func _physics_process(delta):
 	movement_direction = movement_direction.normalized()
 	velocity = movement_direction * speed
 	move_and_slide()
-
+	# Rota el nodo hacia el parámetro
 	look_at(get_global_mouse_position())
 
 
@@ -44,16 +44,13 @@ func _unhandled_input(event):
 func set_camera_transform(camera_path: NodePath):
 	camera_transform.remote_path = camera_path
 
-func reload():
-	weapon.start_reload()
-
+# Devuelve el equipo 0, 1, 2 en función del enum
 func get_team() -> int:
 	return team.team
 	
 func handle_hit():
 	health_stat.health -= 10
 	emit_signal("player_health_changed", health_stat.health)
-	print(health_stat.health)
 	if health_stat.health <= 0:
 		die()
 	

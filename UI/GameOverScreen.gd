@@ -11,9 +11,9 @@ func _set_title(win: bool):
 		title.modulate = Color.RED
 
 func _on_restart_pressed():
+	print("PULSO EL BOTÓN RESTART")
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/Main.tscn")
 
-
-func _on_quit_button_down():
+func _on_exit_pressed():
 	get_tree().quit()

@@ -5,7 +5,6 @@
 [ext_resource type="FontFile" uid="uid://xof25rhshcrp" path="res://assets/KodeMono-VariableFont_wght.ttf" id="3_erohx"]
 
 [node name="MainMenuScreen" type="CanvasLayer"]
-process_mode = 2
 script = ExtResource("1_am4dr")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -39,18 +38,17 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="PlayButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2"]
+[node name="Play" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_erohx")
 theme_override_font_sizes/font_size = 32
 text = "  PLAY  "
 
-[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2"]
-process_mode = 1
+[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_erohx")
 theme_override_font_sizes/font_size = 32
-text = "QUIT"
+text = " EXIT "
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows2/Exit" to="." method="_on_exit_pressed"]
