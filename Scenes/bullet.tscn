@@ -8,6 +8,7 @@ radius = 4.12311
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_iwbtd")
+speed = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_l4a1w")

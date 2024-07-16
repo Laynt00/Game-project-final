@@ -1,6 +1,7 @@
 extends Node2D
 
 const Player = preload("res://Scenes/Player.tscn")
+const GameOverScreen = preload("res://UI/GameOverScreen.tscn")
 
 @onready var capturable_base_manager = $CapturableBaseManager
 @onready var ally_ai = $AllyMapAI
@@ -25,7 +26,8 @@ func _ready():
 	var bases = capturable_base_manager.get_capturable_bases()
 	ally_ai.initialize(bases, ally_respawn.get_children())
 	enemy_ai.initialize(bases, enemy_respawns.get_children())
-	
+	capturable_base_manager.player_captured_all_bases.connect(Callable(self, "handle_player_win"))
+	capturable_base_manager.player_lost_all_bases.connect(Callable(self, "handle_player_lost"))
 	spawn_player()
 	
 func spawn_player():
@@ -34,5 +36,17 @@ func spawn_player():
 	player.set_camera_transform(camera.get_path())
 	player.died.connect(Callable(self, "spawn_player"))
 	gui._set_player(player)
+	
+func handle_player_win():
+	var game_over = GameOverScreen.instantiate()
+	add_child(game_over)
+	game_over._set_title(true)
+	get_tree().paused =  true
+	
+func handle_player_lost():
+	var game_over = GameOverScreen.instantiate()
+	add_child(game_over)
+	game_over._set_title(false)
+	get_tree().paused =  true
 	
 	

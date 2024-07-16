@@ -4,7 +4,7 @@ class_name Player
 signal died
 signal player_health_changed(new_health)
 
-@export var speed: int = 300
+@export var speed: int = 200
 
 @onready var team = $Team
 @onready var weapon = $Weapon

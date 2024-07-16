@@ -18,7 +18,6 @@ func _set_player(player: Player):
 	
 func _set_new_health_value(new_health : int):
 	health_bar.value = new_health
-	print("ACTUALIZO VIDA!SDDD")
 	
 func _set_current_ammo(new_ammo: int):
 	current_ammo.text = str(new_ammo)

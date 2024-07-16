@@ -54,7 +54,7 @@ texture = ExtResource("3_w27sp")
 position = Vector2(8, 0)
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]
@@ -70,3 +70,4 @@ libraries = {
 
 [node name="gunshot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_3qcth")
+volume_db = -6.623
